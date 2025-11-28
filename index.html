@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sikibidi API MENU</title>
 
+<!-- Google AdSense đã có -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6046021264730924"
+     crossorigin="anonymous"></script>
+
 <style>
     body {
         margin: 0;
@@ -51,6 +55,25 @@
         border-radius: 6px;
         font-weight: bold;
         cursor: pointer;
+    }
+
+    /* Nút Discord phía dưới login */
+    .discord-btn {
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:10px 20px;
+        background:#5865F2;
+        color:white;
+        border-radius:6px;
+        text-decoration:none;
+        font-weight:bold;
+        gap:8px;
+        margin-top:10px;
+    }
+    .discord-btn img {
+        width:20px;
+        height:20px;
     }
 
     /* MENU TRÁI */
@@ -112,10 +135,32 @@
 <!-- LOGIN PAGE -->
 <div id="loginBox">
     <h2 class="glow">🔐 LOGIN SYSTEM</h2>
+
+    <!-- Google AdSense -->
+    <div style="text-align:center; margin-bottom:10px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6046021264730924"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <input id="user" placeholder="Tài khoản...">
     <input id="pass" type="password" placeholder="Mật khẩu...">
     <button onclick="login()">ĐĂNG NHẬP</button>
     <p id="loginFail" style="color:#ff3b3b; text-align:center;"></p>
+
+    <!-- Nút Discord phía dưới login -->
+    <div style="text-align:center;">
+        <a href="https://discord.gg/zF2RsaXu2u" target="_blank" class="discord-btn">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
+            🔗 Tham gia Discord Server
+        </a>
+    </div>
 </div>
 
 <!-- MENU + CONTENT -->
