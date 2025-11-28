@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sikibidi API MENU</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #000;
+        font-family: Consolas, monospace;
+        color: #00ffea;
+    }
+
+    /* HIỆU ỨNG GLOW */
+    .glow {
+        text-shadow: 0 0 10px #00fff2, 0 0 20px #00fff2;
+    }
+
+    /* LOGIN */
+    #loginBox {
+        width: 320px;
+        padding: 20px;
+        background: #021b1b;
+        box-shadow: 0 0 20px #00fff2;
+        border-radius: 8px;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #loginBox h2 {
+        text-align: center;
+        color: #00fff2;
+    }
+    #loginBox input {
+        width: 100%;
+        padding: 10px;
+        background: #002d2d;
+        border: 1px solid #00fff2;
+        color: #00fff2;
+        border-radius: 6px;
+        margin: 10px 0;
+    }
+    #loginBox button {
+        width: 100%;
+        padding: 10px;
+        background: #00fff2;
+        color: black;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* MENU TRÁI */
+    .side-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        padding: 10px;
+        background: #001818;
+        border-right: 2px solid #00fff2;
+        overflow-y: auto;
+        display: none;
+    }
+    .side-menu h3 {
+        text-align: center;
+        color: #00fff2;
+    }
+    .side-menu li {
+        background: #002626;
+        margin: 6px 0;
+        padding: 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        text-align: center;
+        color: #00fff2;
+    }
+
+    /* CONTENT */
+    .content {
+        margin-left: 220px;
+        padding: 20px;
+        display: none;
+    }
+
+    input, button {
+        background: #001616;
+        border: 1px solid #00fff2;
+        color: #00fff2;
+    }
+    button {
+        background: #00fff2;
+        color: black;
+        font-weight: bold;
+    }
+    .output {
+        background: #001414;
+        padding: 10px;
+        border: 1px solid #00fff2;
+        margin-top: 10px;
+        white-space: pre-wrap;
+        border-radius: 6px;
+    }
+</style>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="loginBox">
+    <h2 class="glow">🔐 LOGIN SYSTEM</h2>
+    <input id="user" placeholder="Tài khoản...">
+    <input id="pass" type="password" placeholder="Mật khẩu...">
+    <button onclick="login()">ĐĂNG NHẬP</button>
+    <p id="loginFail" style="color:#ff3b3b; text-align:center;"></p>
+</div>
+
+<!-- MENU + CONTENT -->
+<div class="side-menu" id="sideMenu">
+    <h3 class="glow">EMOTE LIST</h3>
+    <ul id="emoteList"></ul>
+</div>
+
+<div class="content" id="mainContent">
+    <h1 class="glow">⭐ SIKIBIDI API MENU ⭐</h1>
+
+    <h2 class="glow">API EMOTE</h2>
+    <input id="team" placeholder="Nhập team code">
+    <input id="uid1" placeholder="UID 1">
+    <input id="uid2" placeholder="UID 2">
+    <input id="uid3" placeholder="UID 3">
+    <input id="uid4" placeholder="UID 4">
+    <input id="emote" placeholder="Tên emote (vd: m60, xe...)">
+    <button onclick="runEmote()">RUN EMOTE</button>
+    <div id="out1" class="output"></div>
+
+    <h2 class="glow">API GHOST</h2>
+    <input id="teamGhost" placeholder="Team">
+    <button onclick="runGhost()">RUN GHOST</button>
+    <div id="out2" class="output"></div>
+
+    <h2 class="glow">API TEAM 5</h2>
+    <input id="uid5" placeholder="UID">
+    <button onclick="runTeam5()">RUN TEAM 5</button>
+    <div id="out3" class="output"></div>
+
+    <h2 class="glow">API LAG</h2>
+    <input id="teamLag" placeholder="Team">
+    <button onclick="runLag()">RUN LAG</button>
+    <div id="out4" class="output"></div>
+</div>
+
+<script>
+// ----- LOGIN -----
+function login() {
+    let u = document.getElementById("user").value;
+    let p = document.getElementById("pass").value;
+    if (u === "Sikibidi4ff" && p === "2026") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("sideMenu").style.display = "block";
+        document.getElementById("mainContent").style.display = "block";
+    } else {
+        document.getElementById("loginFail").textContent = "❌ Sai tài khoản hoặc mật khẩu!";
+    }
+}
+
+// MAP EMOTE
+const emoteMap = {
+    "m60":"909051003","soka":"909000068","mangxa":"909000075","longtoc":"909000081","phomat":"909000090",
+    "m4a1":"909033001","camco":"909000034","xm8":"909000085","ump":"909000098","mp5":"909033002",
+    "m1887":"909035007","m1014lv8":"909039011","thomson":"909038010","g18":"909038012","an94":"909035012",
+    "goda":"909041005","mp40tiachop":"909040010","lv100":"909042007","chimgokien":"909042008",
+    "noel":"909051002","cungten":"909051012","xe":"909051010","canhhong":"909051001","cuoi":"909051015",
+    "voisen":"909051004","choigame":"909051017","cuoi2":"909000002","chongday":"909000012","chicken":"909000006",
+    "ngaivang":"909000014","aicap":"909000011","tanghoa":"909000010","buocdicuaquy":"909000020",
+    "dakungfu":"909000028","thatim":"909000045","AK":"909000063","nhayvoicho":"909000052","saitama1":"909000064",
+    "siu":"909000066","mangxa4nguoi":"909000071","xemangxa":"909000074","cudam":"909000067","namdam":"909037011",
+    "chayraimoney":"909035001","Ctsinhton":"909034011","tamnang":"909036006","xevang4banh":"909040001",
+    "baytrenkiem":"909041004","xichdu":"909040013","sikibidi":"909042017","xemoto":"909043009",
+    "xe_lambo":"909042012","traitim2nguoi":"909043010","cauhon":"909043013","zombie":"909044012",
+    "parafal":"909045001","maico":"909045009","ngoithien":"909045015","cuoingua":"909045003",
+    "phao":"909045005","bapbenh":"909045012","6nong":"909046010","camco2":"909046013","sutbong":"909046015",
+    "nhaybong":"909046016","lacdich":"909046017","ngoighe":"909047001","ghetinhyeu":"909047003",
+    "canh1":"909047004","ngaivang2":"909047005","khoecup":"909047006","rasengan":"909047015",
+    "bithuatlangla":"909047016","ketannaruto":"909047017","chayninja":"909047018","ketannaruto2":"909047019",
+    "guitar":"909048003","piano":"909048004","nhaydanhtrong":"909048005","chacchac":"909048006",
+    "ngu":"909048007","lacda":"909048009","camco3":"909048011","nhaydengiau":"909048012",
+    "nailoong":"909049001","songaychoi":"909049006","p90":"909049010","oi":"909049013",
+    "uethochuyensinh":"909050002","hoadon":"909050005","minato":"909050006","The_Rings":"909050009",
+    "sungcuoi":"909050020"
+};
+
+// In menu trái
+let UL = document.getElementById("emoteList");
+Object.keys(emoteMap).forEach(name=>{
+    let li=document.createElement("li");
+    li.textContent=name;
+    UL.appendChild(li);
+});
+
+// API
+async function runEmote(){
+    let emo=document.getElementById("emote").value.toLowerCase().trim();
+    if(!emoteMap[emo]) return out1.textContent="❌ Không tìm thấy emote!";
+    let url=`https://ff-community-apiemoteessss.onrender.com/emote?teamcode=${team.value}&uid1=${uid1.value}&uid2=${uid2.value}&uid3=${uid3.value}&uid4=${uid4.value}&emote_id=${emoteMap[emo]}`;
+    out1.textContent=await (await fetch(url)).text();
+}
+async function runGhost(){
+    out2.textContent=await (await fetch(`https://ghost-code-amph.onrender.com/execute_command_all?command=/bngx=${teamGhost.value}`)).text();
+}
+async function runTeam5(){
+    out3.textContent=await (await fetch(`https://ff-community-apiemoteessss.onrender.com/5?uid=${uid5.value}&region=VN`)).text();
+}
+async function runLag(){
+    out4.textContent=await (await fetch(`https://ff-community-apiemoteessss.onrender.com/lag?teamcode=${teamLag.value}`)).text();
+}
+</script>
+
+</body>
+</html>
