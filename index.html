@@ -44,12 +44,13 @@ body {
 }
 
 .discord-link {
-    margin-top:10px;
-    text-align:center;
+    margin-top:10px; text-align:center;
 }
 .discord-link a {
     color:#00fff2; text-decoration:none; font-weight:bold;
+    display:inline-flex; align-items:center; gap:6px;
 }
+.discord-link svg { width:20px; height:20px; fill:#00fff2; }
 
 .side-menu {
     position: fixed; top:0; left:0;
@@ -85,6 +86,7 @@ body {
     border:1px solid #00fff2; margin-top:10px; border-radius:6px;
     white-space: pre-wrap;
 }
+.content .discord-link { margin-top:20px; }
 </style>
 </head>
 <body>
@@ -96,7 +98,10 @@ body {
     <button onclick="login()">ĐĂNG NHẬP</button>
     <p id="loginFail" style="color:#ff3b3b; text-align:center;"></p>
     <div class="discord-link">
-        <a href="https://discord.gg/YOURDISCORD" target="_blank">💬 Join Discord</a>
+        <a href="https://discord.gg/YOURDISCORD" target="_blank">
+            <svg viewBox="0 0 71 55"><path d="M60.104 4.552A58.4 58.4 0 0047.684.5a41.9 41.9 0 00-1.88 3.833 55.204 55.204 0 00-16.74 0A41.9 41.9 0 0027.186.5a58.4 58.4 0 00-12.42 4.052C2.87 20.44-.707 36.884.416 53.167a63.3 63.3 0 0019.16-5.67 45.03 45.03 0 01-3.934-2.025c.33-.23.654-.466.97-.706 7.58 3.523 15.803 3.523 23.382 0 .317.24.64.476.97.706a44.8 44.8 0 01-3.934 2.024 63.23 63.23 0 0019.16 5.67c1.123-16.283-2.453-32.728-12.88-48.615zM23.725 37.133c-3.45 0-6.263-3.156-6.263-7.033 0-3.875 2.78-7.03 6.263-7.03 3.48 0 6.293 3.154 6.263 7.03 0 3.878-2.78 7.033-6.263 7.033zm23.553 0c-3.45 0-6.263-3.156-6.263-7.033 0-3.875 2.78-7.03 6.263-7.03 3.48 0 6.293 3.154 6.263 7.03 0 3.878-2.78 7.033-6.263 7.033z"/></svg>
+            Join Discord
+        </a>
     </div>
 </div>
 
@@ -130,6 +135,13 @@ body {
     <input id="teamLag" placeholder="Team">
     <button onclick="runLag()">RUN LAG</button>
     <div id="out4" class="output"></div>
+
+    <div class="discord-link">
+        <a href="https://discord.gg/YOURDISCORD" target="_blank">
+            <svg viewBox="0 0 71 55"><path d="M60.104 4.552A58.4 58.4 0 0047.684.5a41.9 41.9 0 00-1.88 3.833 55.204 55.204 0 00-16.74 0A41.9 41.9 0 0027.186.5a58.4 58.4 0 00-12.42 4.052C2.87 20.44-.707 36.884.416 53.167a63.3 63.3 0 0019.16-5.67 45.03 45.03 0 01-3.934-2.025c.33-.23.654-.466.97-.706 7.58 3.523 15.803 3.523 23.382 0 .317.24.64.476.97.706a44.8 44.8 0 01-3.934 2.024 63.23 63.23 0 0019.16 5.67c1.123-16.283-2.453-32.728-12.88-48.615zM23.725 37.133c-3.45 0-6.263-3.156-6.263-7.033 0-3.875 2.78-7.03 6.263-7.03 3.48 0 6.293 3.154 6.263 7.03 0 3.878-2.78 7.033-6.263 7.033zm23.553 0c-3.45 0-6.263-3.156-6.263-7.033 0-3.875 2.78-7.03 6.263-7.03 3.48 0 6.293 3.154 6.263 7.03 0 3.878-2.78 7.033-6.263 7.033z"/></svg>
+            Join Discord
+        </a>
+    </div>
 </div>
 
 <script>
@@ -140,9 +152,11 @@ function login() {
         document.getElementById("loginBox").style.display="none";
         document.getElementById("sideMenu").style.display="block";
         document.getElementById("mainContent").style.display="block";
+        // ✅ Không chạy emote tự động
     } else { document.getElementById("loginFail").textContent="❌ Sai tài khoản hoặc mật khẩu!"; }
 }
 
+// --- FULL EMOTE LIST ---
 const emoteMap = {
 "m60":"909051003","soka":"909000068","mangxa":"909000075","longtoc":"909000081","phomat":"909000090",
 "m4a1":"909033001","camco":"909000034","xm8":"909000085","ump":"909000098","mp5":"909033002",
@@ -177,11 +191,14 @@ Object.keys(emoteMap).forEach(name=>{
     li.appendChild(text); li.appendChild(btn); UL.appendChild(li);
 });
 
+// --- RUN EMOTE ---
 async function runEmote(emoteName){
     out1.textContent=`⏳ Đang chạy emote "${emoteName}"...`;
     await fetch(`https://ff-community-apiemoteessss.onrender.com/emote?teamcode=${team.value}&uid1=${uid1.value}&uid2=${uid2.value}&uid3=${uid3.value}&uid4=${uid4.value}&emote_id=${emoteMap[emoteName.toLowerCase()]}`);
     out1.textContent=`✅ Emote "${emoteName}" xong!`;
 }
+
+// --- OTHER API ---
 async function runGhost(){
     out2.textContent=`⏳ Đang chạy gun...`;
     await fetch(`https://ghost-code-amph.onrender.com/execute_command_all?command=/bngx=${teamGhost.value}`);
