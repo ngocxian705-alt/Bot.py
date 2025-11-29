@@ -43,6 +43,14 @@ body {
     border-radius:6px; font-weight:bold; cursor:pointer;
 }
 
+.discord-link {
+    margin-top:10px;
+    text-align:center;
+}
+.discord-link a {
+    color:#00fff2; text-decoration:none; font-weight:bold;
+}
+
 .side-menu {
     position: fixed; top:0; left:0;
     width:280px; height:100%; padding:10px;
@@ -87,6 +95,9 @@ body {
     <input id="pass" type="password" placeholder="Mật khẩu...">
     <button onclick="login()">ĐĂNG NHẬP</button>
     <p id="loginFail" style="color:#ff3b3b; text-align:center;"></p>
+    <div class="discord-link">
+        <a href="https://discord.gg/YOURDISCORD" target="_blank">💬 Join Discord</a>
+    </div>
 </div>
 
 <div class="side-menu" id="sideMenu">
@@ -132,7 +143,6 @@ function login() {
     } else { document.getElementById("loginFail").textContent="❌ Sai tài khoản hoặc mật khẩu!"; }
 }
 
-// ----- FULL EMOTE LIST -----
 const emoteMap = {
 "m60":"909051003","soka":"909000068","mangxa":"909000075","longtoc":"909000081","phomat":"909000090",
 "m4a1":"909033001","camco":"909000034","xm8":"909000085","ump":"909000098","mp5":"909033002",
@@ -167,7 +177,6 @@ Object.keys(emoteMap).forEach(name=>{
     li.appendChild(text); li.appendChild(btn); UL.appendChild(li);
 });
 
-// ----- RUN FUNCTIONS CHỈ HIỂN THỊ THÀNH CÔNG -----
 async function runEmote(emoteName){
     out1.textContent=`⏳ Đang chạy emote "${emoteName}"...`;
     await fetch(`https://ff-community-apiemoteessss.onrender.com/emote?teamcode=${team.value}&uid1=${uid1.value}&uid2=${uid2.value}&uid3=${uid3.value}&uid4=${uid4.value}&emote_id=${emoteMap[emoteName.toLowerCase()]}`);
@@ -179,14 +188,14 @@ async function runGhost(){
     out2.textContent=`✅ Gun chạy thành công!`;
 }
 async function runTeam5(){
-    out3.textContent=`⏳ Đang chạy emote...`;
+    out3.textContent=`⏳ Đang chạy TEAM 5...`;
     await fetch(`https://ff-community-apiemoteessss.onrender.com/5?uid=${uid5.value}&region=VN`);
-    out3.textContent=`✅ Hoàn tất!`;
+    out3.textContent=`✅ TEAM 5 hoàn tất!`;
 }
 async function runLag(){
-    out4.textContent=`⏳ Đang chạy emote...`;
+    out4.textContent=`⏳ Đang chạy LAG...`;
     await fetch(`https://ff-community-apiemoteessss.onrender.com/lag?teamcode=${teamLag.value}`);
-    out4.textContent=`✅ Hoàn tất!`;
+    out4.textContent=`✅ LAG hoàn tất!`;
 }
 </script>
 
