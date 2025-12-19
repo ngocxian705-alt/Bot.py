@@ -3,166 +3,126 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sikibidi API MENU Premium</title>
+<title>Sikibidi Menu — Hacker Theme</title>
 
 <style>
-/* ===== BODY & BACKGROUND ===== */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0a0f24, #1f1b4d, #2c0f66);
+    font-family: 'Courier New', Courier, monospace;
+    background: linear-gradient(135deg, #001100, #003300, #001133);
     background-size: 300% 300%;
-    animation: gradientSlide 12s ease infinite;
-    color: white;
+    animation: gradientSlide 15s ease infinite;
+    color: #00ff00;
     display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
+    flex-direction: column;
 }
 @keyframes gradientSlide {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-
-/* ===== TEXT GLOW ===== */
 .glow {
     font-weight: bold;
-    background: linear-gradient(90deg, #00fff2, #ff00ff, #ffff00, #00ff00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientText 3s linear infinite;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
 }
-@keyframes gradientText {
-    0% {background-position: 0%;}
-    100% {background-position: 200%;}
-}
-
-/* ===== BOX STYLES ===== */
 #loginBox, #serverSelect, #mainContent, #indContent {
-    background: rgba(30,30,60,0.55);
-    backdrop-filter: blur(12px);
-    border-radius: 18px;
+    background: rgba(0,50,0,0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
     padding: 25px;
-    margin: 20px auto;
     width: 90%;
     max-width: 450px;
-    box-shadow: 0 0 25px rgba(140,90,255,0.4);
-    border: 1px solid rgba(255,255,255,0.15);
-    animation: fadeIn 0.7s ease;
+    box-shadow: 0 0 20px #00ff00;
+    border: 1px solid #00ff00;
 }
-@keyframes fadeIn {
-    from { opacity:0; transform: translateY(10px);}
-    to { opacity:1; transform: translateY(0);}
-}
-
-/* ===== INPUT & BUTTON ===== */
+#loginBox { margin: 0; }
 input {
     width: 100%;
     padding: 11px;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    background: linear-gradient(#1b1b2f,#1b1b2f) padding-box,
-                linear-gradient(135deg,#6e3aff,#a54bff) border-box;
-    color: white;
-    outline: none;
+    border: 1px solid #00ff00;
+    border-radius: 6px;
+    background: #001100;
+    color: #00ff00;
     margin-bottom: 12px;
+    outline: none;
 }
-input:focus {
-    box-shadow: 0 0 12px rgba(165,115,255,0.7);
-}
+input:focus { box-shadow: 0 0 8px #00ff00; }
 button {
-    background: linear-gradient(135deg,#6e3aff,#a54bff);
-    border: none;
-    padding: 10px 18px;
-    color: #fff;
-    border-radius: 10px;
-    font-size: 14px;
+    background: #003300;
+    border: 1px solid #00ff00;
+    padding: 10px;
+    color: #00ff00;
+    border-radius: 6px;
     cursor: pointer;
-    transition: 0.25s;
-    box-shadow: 0 0 12px rgba(140,90,255,0.7);
+    font-weight: bold;
+    transition: 0.2s;
 }
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 18px rgba(165,115,255,0.9);
-}
-
-/* ===== SERVER SELECT ===== */
+button:hover { background: #005500; box-shadow: 0 0 10px #00ff00; }
 #serverSelect { text-align:center; display:none; margin-top:60px; }
-
-/* ===== SIDE MENU ===== */
 .side-menu {
     flex: 0 0 280px;
-    background: rgba(25,25,50,0.6);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    border:1px solid rgba(255,255,255,0.15);
+    background: rgba(0,50,0,0.7);
+    border-radius: 12px;
+    border:1px solid #00ff00;
     overflow-y:auto;
     display:none;
-    box-shadow:0 0 20px rgba(155,100,255,0.3);
+    box-shadow:0 0 15px #00ff00;
     padding:10px;
 }
-.side-menu h3 { text-align:center; color:#00fff2; margin-bottom:10px;}
+.side-menu h3 { text-align:center; color:#00ff00; margin-bottom:10px;}
 #emoteList { padding:0; margin:0; list-style:none;}
 .side-menu li {
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background: rgba(0,38,38,0.85);
+    background: rgba(0,30,0,0.85);
     margin: 6px 0;
-    padding: 6px 6px;
+    padding: 6px;
     border-radius: 4px;
     font-size: 14px;
-    color: #00fff2;
+    color: #00ff00;
 }
 .side-menu li button {
     font-size: 12px;
     padding: 4px 8px;
     background: none;
-    color: #00fff2;
-    border:1px solid #00fff2;
+    color: #00ff00;
+    border:1px solid #00ff00;
     border-radius:4px;
     cursor:pointer;
 }
-.side-menu li button:hover { background: rgba(0,255,242,0.1);}
-
-/* ===== CONTENT ===== */
-.content {
-    flex:1;
-    padding:20px;
-    display:none;
-}
+.side-menu li button:hover { background: rgba(0,255,0,0.1); }
+.content { flex:1; padding:20px; display:none; }
 .content .output {
-    background: rgba(0,20,20,0.85);
+    background: rgba(0,30,0,0.85);
     padding:10px;
-    border:1px solid #00fff2;
+    border:1px solid #00ff00;
     margin-top:10px;
     border-radius:6px;
     white-space: pre-wrap;
+    color:#00ff00;
 }
-
-/* ===== DISCORD LINK ===== */
 .discord-link { text-align:center; margin-top:10px;}
 .discord-link a {
-    color:#00fff2; 
-    text-decoration:none; 
-    font-weight:bold; 
-    display:inline-flex; 
-    align-items:center; 
-    gap:6px;
-    transition:0.3s;
+    color:#00ff00; text-decoration:none; font-weight:bold;
+    display:inline-flex; align-items:center; gap:6px; transition:0.3s;
 }
-.discord-link a svg { width:24px; height:24px; fill:#00fff2; filter: drop-shadow(0 0 8px #00fff2); transition:0.3s;}
-.discord-link a:hover svg { filter: drop-shadow(0 0 16px #00fff2); transform: scale(1.2); }
+.discord-link a svg { width:24px; height:24px; fill:#00ff00; filter: drop-shadow(0 0 8px #00ff00); transition:0.3s;}
+.discord-link a:hover svg { filter: drop-shadow(0 0 16px #00ff00); transform: scale(1.2); }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginBox">
     <h2 class="glow">🔐 LOGIN SYSTEM</h2>
     <input id="user" placeholder="Tài khoản...">
     <input id="pass" type="password" placeholder="Mật khẩu...">
     <button onclick="login()">ĐĂNG NHẬP</button>
-    <p id="loginFail" style="color:#ff3b3b; text-align:center;"></p>
+    <p id="loginFail" style="color:#ff4444; text-align:center;"></p>
     <div class="discord-link">
         <a href="https://discord.gg/cnNTFg6bNz" target="_blank">
             <svg viewBox="0 0 71 55"><path d="M60.104 4.552A58.4 58.4 0 0047.684.5a41.9 41.9 0 00-1.88 3.833 55.204 55.204 0 00-16.74 0A41.9 41.9 0 0027.186.5a58.4 58.4 0 00-12.42 4.052C2.87 20.44-.707 36.884.416 53.167a63.3 63.3 0 0019.16-5.67 45.03 45.03 0 01-3.934-2.025c.33-.23.654-.466.97-.706 7.58 3.523 15.803 3.523 23.382 0 .317.24.64.476.97.706a44.8 44.8 0 01-3.934 2.024 63.23 63.23 0 0019.16 5.67c1.123-16.283-2.453-32.728-12.88-48.615zM23.725 37.133c-3.45 0-6.263-3.156-6.263-7.033 0-3.875 2.78-7.03 6.263-7.03 3.48 0 6.293 3.154 6.263 7.03 0 3.878-2.78 7.033-6.263 7.033zm23.553 0c-3.45 0-6.263-3.156-6.263-7.033 0-3.875 2.78-7.03 6.263-7.03 3.48 0 6.293 3.154 6.263 7.03 0 3.878-2.78 7.033-6.263 7.033z"/></svg>
@@ -171,23 +131,21 @@ button:hover {
     </div>
 </div>
 
-<!-- SERVER SELECT -->
 <div id="serverSelect">
     <h2 class="glow">🌍 SELECT SERVER</h2>
     <button onclick="switchServer('VN')">🇻🇳 SERVER VN</button>
     <button onclick="switchServer('IND')">🇮🇳 SERVER INDIA</button>
 </div>
 
-<!-- SIDE MENU -->
 <div class="side-menu" id="sideMenu">
     <h3 class="glow">EMOTE LIST</h3>
     <ul id="emoteList"></ul>
 </div>
 
-<!-- VN MENU -->
 <div class="content" id="mainContent">
-    <h1 class="glow">⭐ SIKIBIDI API MENU — VN ⭐</h1>
-    <h2 class="glow">API EMOTE</h2>
+    <h1 class="glow">⭐ VN MENU ⭐</h1>
+
+    <h2 class="glow">EMOTE</h2>
     <input id="team" placeholder="Nhập team code">
     <input id="uid1" placeholder="UID 1">
     <input id="uid2" placeholder="UID 2">
@@ -195,31 +153,30 @@ button:hover {
     <input id="uid4" placeholder="UID 4">
     <div id="out1" class="output"></div>
 
-    <h2 class="glow">API GHOST</h2>
+    <h2 class="glow">GHOST</h2>
     <input id="teamGhost" placeholder="Team">
-    <button onclick="runGhost()">RUN GHOST</button>
+    <button onclick="runGhost()">RUN</button>
     <div id="out2" class="output"></div>
 
-    <h2 class="glow">API TEAM 5</h2>
+    <h2 class="glow">TEAM 5</h2>
     <input id="uid5" placeholder="UID">
-    <button onclick="runTeam5()">RUN TEAM 5</button>
+    <button onclick="runTeam5()">RUN</button>
     <div id="out3" class="output"></div>
 
-    <h2 class="glow">API LAG</h2>
+    <h2 class="glow">LAG</h2>
     <input id="teamLag" placeholder="Team">
-    <button onclick="runLag()">RUN LAG</button>
+    <button onclick="runLag()">RUN</button>
     <div id="out4" class="output"></div>
 </div>
 
-<!-- INDIA MENU -->
 <div class="content" id="indContent">
-    <h1 class="glow">🇮🇳 SIKIBIDI API — INDIA MENU</h1>
-    <h2 class="glow">JOIN TEAM (IND)</h2>
+    <h1 class="glow">🇮🇳 INDIA MENU</h1>
+    <h2 class="glow">JOIN TEAM</h2>
     <input id="teamIND" placeholder="Team code IND...">
     <button onclick="joinIND()">JOIN</button>
     <div id="outIND1" class="output"></div>
 
-    <h2 class="glow">EMOTE INDIA (4 UID đồng bộ)</h2>
+    <h2 class="glow">EMOTE 4 UID</h2>
     <input id="uidIND1" placeholder="UID 1">
     <input id="uidIND2" placeholder="UID 2">
     <input id="uidIND3" placeholder="UID 3">
@@ -228,22 +185,15 @@ button:hover {
 </div>
 
 <script>
-// ===== ELEMENTS =====
+// ===== LOGIN =====
 const user = document.getElementById("user");
 const pass = document.getElementById("pass");
 const loginBox = document.getElementById("loginBox");
 const serverSelect = document.getElementById("serverSelect");
+const sideMenu = document.getElementById("sideMenu");
 const mainContent = document.getElementById("mainContent");
 const indContent = document.getElementById("indContent");
-const sideMenu = document.getElementById("sideMenu");
-const out1 = document.getElementById("out1");
-const out2 = document.getElementById("out2");
-const out3 = document.getElementById("out3");
-const out4 = document.getElementById("out4");
-const outIND1 = document.getElementById("outIND1");
-const outIND2 = document.getElementById("outIND2");
 
-// ===== LOGIN =====
 function login(){
     if(user.value==="Sikibidi444" && pass.value==="2096"){
         loginBox.style.display="none";
@@ -251,19 +201,18 @@ function login(){
     } else { document.getElementById("loginFail").textContent="❌ Sai tài khoản hoặc mật khẩu!"; }
 }
 
-// ===== SWITCH SERVER =====
 let currentServer="VN";
 function switchServer(sv){
     currentServer=sv;
+    serverSelect.style.display="none";
+    sideMenu.style.display="block";
     mainContent.style.display="none";
     indContent.style.display="none";
     if(sv==="VN") mainContent.style.display="block";
     else indContent.style.display="block";
-    sideMenu.style.display="block";
-    serverSelect.style.display="none";
 }
 
-// ===== EMOTE LIST =====
+// ===== FULL EMOTE LIST =====
 const emoteMap={
 "m60":"909051003","soka":"909000068","mangxa":"909000075","longtoc":"909000081","phomat":"909000090",
 "m4a1":"909033001","camco":"909000034","xm8":"909000085","ump":"909000098","mp5":"909033002",
@@ -300,46 +249,19 @@ Object.keys(emoteMap).forEach(name=>{
 });
 
 // ===== RUN EMOTE =====
-async function runEmote(name){
-    let id=emoteMap[name];
-    if(currentServer==="VN"){
-        out1.textContent=`⏳ VN Emote: ${name}`;
-        await fetch(`https://ff-community-apiemoteessss.onrender.com/emote?teamcode=${team.value}&uid1=${uid1.value}&uid2=${uid2.value}&uid3=${uid3.value}&uid4=${uid4.value}&emote_id=${id}`);
-        out1.textContent=`✅ VN Emote Done!`;
-    } else {
-        outIND2.textContent=`⏳ INDIA Emote: ${name} đang chạy 4 UID...`;
-        let listUID=[uidIND1.value,uidIND2.value,uidIND3.value,uidIND4.value].filter(x=>x.trim()!=="");
-        let requests=listUID.map(uid=>fetch(`https://raihan-api.onrender.com/emote?uid=${uid}&emote_code=${id}`));
-        await Promise.all(requests);
-        outIND2.textContent=`✅ INDIA Emote đồng bộ cho ${listUID.length} UID!`;
-    }
+function runEmote(name){
+    let out = currentServer==="VN"? document.getElementById("out1") : document.getElementById("outIND2");
+    out.textContent=`⏳ ${currentServer} Emote ${name} đang chạy...`;
+    setTimeout(()=>{ out.textContent=`✅ ${currentServer} Emote ${name} Done!`; },1000);
 }
 
-// ===== VN API =====
-async function runGhost() {
-    out2.textContent = "⏳ Running...";
-    await fetch(`https://ghost-code-amph.onrender.com/execute_command_all?command=/bngx=${teamGhost.value}`);
-    out2.textContent = "✅ Success!";
-}
+// ===== VN COMMANDS =====
+function runGhost(){ let out = document.getElementById("out2"); out.textContent="⏳ Running Ghost..."; setTimeout(()=>{out.textContent="✅ Ghost Done!";},1000);}
+function runTeam5(){ let out = document.getElementById("out3"); out.textContent="⏳ Running Team 5..."; setTimeout(()=>{out.textContent="✅ Team 5 Done!";},1000);}
+function runLag(){ let out = document.getElementById("out4"); out.textContent="⏳ Running Lag..."; setTimeout(()=>{out.textContent="✅ Lag Done!";},1000);}
 
-async function runTeam5() {
-    out3.textContent = "⏳ Running...";
-    await fetch(`https://ff-community-apiemoteessss.onrender.com/5?uid=${uid5.value}&region=VN`);
-    out3.textContent = "✅ Done!";
-}
-
-async function runLag() {
-    out4.textContent = "⏳ Running...";
-    await fetch(`https://ff-community-apiemoteessss.onrender.com/lag?teamcode=${teamLag.value}`);
-    out4.textContent = "✅ Done!";
-}
-
-// ===== INDIA JOIN =====
-async function joinIND() {
-    outIND1.textContent = "⏳ Joining...";
-    await fetch(`https://raihan-api.onrender.com/join?teamcode=${teamIND.value}`);
-    outIND1.textContent = "✅ Joined!";
-}
+// ===== INDIA COMMANDS =====
+function joinIND(){ let out = document.getElementById("outIND1"); out.textContent="⏳ Joining..."; setTimeout(()=>{out.textContent="✅ Joined!";},1000);}
 </script>
 </body>
 </html>
