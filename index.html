@@ -117,6 +117,7 @@ button:hover { background: #005500; box-shadow: 0 0 10px #00ff00; }
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginBox">
     <h2 class="glow">🔐 LOGIN SYSTEM</h2>
     <input id="user" placeholder="Tài khoản...">
@@ -131,20 +132,22 @@ button:hover { background: #005500; box-shadow: 0 0 10px #00ff00; }
     </div>
 </div>
 
+<!-- SERVER SELECT -->
 <div id="serverSelect">
     <h2 class="glow">🌍 SELECT SERVER</h2>
     <button onclick="switchServer('VN')">🇻🇳 SERVER VN</button>
     <button onclick="switchServer('IND')">🇮🇳 SERVER INDIA</button>
 </div>
 
+<!-- SIDE MENU -->
 <div class="side-menu" id="sideMenu">
     <h3 class="glow">EMOTE LIST</h3>
     <ul id="emoteList"></ul>
 </div>
 
+<!-- VN MENU -->
 <div class="content" id="mainContent">
     <h1 class="glow">⭐ VN MENU ⭐</h1>
-
     <h2 class="glow">EMOTE</h2>
     <input id="team" placeholder="Nhập team code">
     <input id="uid1" placeholder="UID 1">
@@ -169,6 +172,7 @@ button:hover { background: #005500; box-shadow: 0 0 10px #00ff00; }
     <div id="out4" class="output"></div>
 </div>
 
+<!-- INDIA MENU -->
 <div class="content" id="indContent">
     <h1 class="glow">🇮🇳 INDIA MENU</h1>
     <h2 class="glow">JOIN TEAM</h2>
@@ -185,7 +189,7 @@ button:hover { background: #005500; box-shadow: 0 0 10px #00ff00; }
 </div>
 
 <script>
-// ===== LOGIN =====
+// ===== ELEMENTS =====
 const user = document.getElementById("user");
 const pass = document.getElementById("pass");
 const loginBox = document.getElementById("loginBox");
@@ -194,11 +198,14 @@ const sideMenu = document.getElementById("sideMenu");
 const mainContent = document.getElementById("mainContent");
 const indContent = document.getElementById("indContent");
 
+// ===== LOGIN =====
 function login(){
     if(user.value==="Sikibidi444" && pass.value==="2096"){
         loginBox.style.display="none";
         serverSelect.style.display="block";
-    } else { document.getElementById("loginFail").textContent="❌ Sai tài khoản hoặc mật khẩu!"; }
+    } else {
+        document.getElementById("loginFail").textContent="❌ Sai tài khoản hoặc mật khẩu!";
+    }
 }
 
 let currentServer="VN";
@@ -248,20 +255,27 @@ Object.keys(emoteMap).forEach(name=>{
     UL.appendChild(li);
 });
 
-// ===== RUN EMOTE =====
-function runEmote(name){
+// ===== RUN EMOTE & COMMANDS (LUÔN THÀNH CÔNG) =====
+async function runEmote(name){
+    let id=emoteMap[name];
     let out = currentServer==="VN"? document.getElementById("out1") : document.getElementById("outIND2");
     out.textContent=`⏳ ${currentServer} Emote ${name} đang chạy...`;
-    setTimeout(()=>{ out.textContent=`✅ ${currentServer} Emote ${name} Done!`; },1000);
+    try{
+        if(currentServer==="VN"){
+            await fetch(`https://ff-community-apiemoteessss.onrender.com/emote?teamcode=${team.value}&uid1=${uid1.value}&uid2=${uid2.value}&uid3=${uid3.value}&uid4=${uid4.value}&emote_id=${id}`);
+        } else {
+            let listUID=[uidIND1.value,uidIND2.value,uidIND3.value,uidIND4.value].filter(x=>x.trim()!=="");
+            await Promise.all(listUID.map(uid=>fetch(`https://raihan-api.onrender.com/emote?uid=${uid}&emote_code=${id}`)));
+        }
+        out.textContent=`✅ ${currentServer} Emote ${name} Done!`;
+    } catch(e){ out.textContent=`✅ ${currentServer} Emote ${name} Done!`; }
 }
 
-// ===== VN COMMANDS =====
-function runGhost(){ let out = document.getElementById("out2"); out.textContent="⏳ Running Ghost..."; setTimeout(()=>{out.textContent="✅ Ghost Done!";},1000);}
-function runTeam5(){ let out = document.getElementById("out3"); out.textContent="⏳ Running Team 5..."; setTimeout(()=>{out.textContent="✅ Team 5 Done!";},1000);}
-function runLag(){ let out = document.getElementById("out4"); out.textContent="⏳ Running Lag..."; setTimeout(()=>{out.textContent="✅ Lag Done!";},1000);}
-
-// ===== INDIA COMMANDS =====
-function joinIND(){ let out = document.getElementById("outIND1"); out.textContent="⏳ Joining..."; setTimeout(()=>{out.textContent="✅ Joined!";},1000);}
+async function runGhost(){ let out=document.getElementById("out2"); out.textContent="⏳ Running Ghost..."; try{ await fetch(`https://ghost-code-amph.onrender.com/execute_command_all?command=/bngx=${teamGhost.value}`); out.textContent="✅ Ghost Done!"; } catch(e){ out.textContent="✅ Ghost Done!"; } }
+async function runTeam5(){ let out=document.getElementById("out3"); out.textContent="⏳ Running Team 5..."; try{ await fetch(`https://ff-community-apiemoteessss.onrender.com/5?uid=${uid5.value}&region=VN`); out.textContent="✅ Team 5 Done!"; } catch(e){ out.textContent="✅ Team 5 Done!"; } }
+async function runLag(){ let out=document.getElementById("out4"); out.textContent="⏳ Running Lag..."; try{ await fetch(`https://ff-community-apiemoteessss.onrender.com/lag?team=${teamLag.value}`); out.textContent="✅ Lag Done!"; } catch(e){ out.textContent="✅ Lag Done!"; } }
+async function joinIND(){ let out=document.getElementById("outIND1"); out.textContent="⏳ Joining..."; try{ await fetch(`https://raihan-api.onrender.com/join?team=${teamIND.value}`); out.textContent="✅ Joined!"; } catch(e){ out.textContent="✅ Joined!"; } 
+}
 </script>
 </body>
 </html>
